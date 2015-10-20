@@ -31,14 +31,9 @@ namespace RoutableActor
                     Fetch fetch;
                     if (_fetchQueue.TryDequeue(out fetch))
                     {
-                        Task.Run(() =>
-                        {
-                            Console.WriteLine("Processing fetch for controller {0}, operation id {1}", fetch.Id,
-                                fetch.OperationId);
-                            _messagesProcessed++;
-
-                            Thread.Sleep(_random.Next(1000, 6000));
-                        }).Wait();
+                        Console.WriteLine("Processing fetch for controller {0}, operation id {1}", fetch.Id,
+                              fetch.OperationId);
+                        _messagesProcessed++;
 
                         Console.WriteLine("Completed processing on operation {0}, messages processed on controller {1} = {2}", fetch.OperationId,
                             fetch.Id, _messagesProcessed);
