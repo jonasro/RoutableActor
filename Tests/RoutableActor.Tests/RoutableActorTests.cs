@@ -17,7 +17,7 @@ namespace RoutableActor.Tests
             
             Repeat(() =>
             {
-                var fetch = new Fetch { Id = random.Next(1, 19), OperationId = random.Next(1000, 100000) };
+                var fetch = new Fetch { Id = random.Next(1, 20), OperationId = random.Next(1000, 100000) };
                 FetchHandler.Handle(fetch);    
             });
 
@@ -26,7 +26,7 @@ namespace RoutableActor.Tests
 
         private void Repeat(Action action)
         {
-            var actions = Enumerable.Repeat(action, 10000).ToArray();
+            var actions = Enumerable.Repeat(action, 1000).ToArray();
             Parallel.Invoke(actions);
         }
     }
