@@ -11,16 +11,9 @@ namespace RoutableActor
         private ConcurrentQueue<Fetch> _fetchQueue;
         private Random _random;
         private int _messagesProcessed;
-        private ManualResetEvent _resetEvent;
-
-        public ManualResetEvent ResetEvent
-        {
-            get { return _resetEvent; }
-        }
-
+       
         public Controller(int controllerId)
         {
-            _resetEvent = new ManualResetEvent(false);
             _fetchQueue = _fetchQueue ?? new ConcurrentQueue<Fetch>();
             _controllerId = controllerId;
             _random = _random ?? new Random();
@@ -44,8 +37,6 @@ namespace RoutableActor
 
                         Console.WriteLine("Completed processing on operation {0}, messages processed on controller {1} = {2}", fetch.OperationId,
                             fetch.ControllerId, _messagesProcessed);
-
-                        _resetEvent.Set();
                     }
 
                     Thread.Sleep(100);
