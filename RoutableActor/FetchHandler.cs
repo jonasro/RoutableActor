@@ -6,6 +6,8 @@
         {
             var controller = ControllerFactory.GetController(fetch.Id);
             controller.Handle(fetch);
+
+            controller.ResetEvent.WaitOne();
         }
     }
 }

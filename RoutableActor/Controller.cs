@@ -10,11 +10,17 @@ namespace RoutableActor
         private int _controllerId;
         private ConcurrentQueue<Fetch> _fetchQueue;
         private Random _random;
-        private int _messagesProcessed
-            ;
+        private int _messagesProcessed;
+        private ManualResetEvent _resetEvent;
+
+        public ManualResetEvent ResetEvent
+        {
+            get { return _resetEvent; }
+        }
 
         public Controller(int controllerId)
         {
+            _resetEvent = new ManualResetEvent(false);
             _fetchQueue = _fetchQueue ?? new ConcurrentQueue<Fetch>();
             _controllerId = controllerId;
             _random = _random ?? new Random();
@@ -33,10 +39,13 @@ namespace RoutableActor
                     {
                         Console.WriteLine("Processing fetch for controller {0}, operation id {1}", fetch.Id,
                               fetch.OperationId);
+
                         _messagesProcessed++;
 
                         Console.WriteLine("Completed processing on operation {0}, messages processed on controller {1} = {2}", fetch.OperationId,
                             fetch.Id, _messagesProcessed);
+
+                        _resetEvent.Set();
                     }
 
                     Thread.Sleep(100);
