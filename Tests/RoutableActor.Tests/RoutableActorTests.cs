@@ -16,7 +16,7 @@ namespace RoutableActor.Tests
             
             Repeat(1000, () =>
             {
-                var fetch = new Fetch { Id = random.Next(1, 20), OperationId = random.Next(1000, 100000) };
+                var fetch = new Fetch { ControllerId = random.Next(1, 20), OperationId = random.Next(1000, 100000) };
                 FetchHandler.Handle(fetch);    
             });
 

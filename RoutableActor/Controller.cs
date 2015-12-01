@@ -37,13 +37,13 @@ namespace RoutableActor
                     Fetch fetch;
                     if (_fetchQueue.TryDequeue(out fetch))
                     {
-                        Console.WriteLine("Processing fetch for controller {0}, operation id {1}", fetch.Id,
+                        Console.WriteLine("Processing fetch for controller {0}, operation id {1}", fetch.ControllerId,
                               fetch.OperationId);
 
                         _messagesProcessed++;
 
                         Console.WriteLine("Completed processing on operation {0}, messages processed on controller {1} = {2}", fetch.OperationId,
-                            fetch.Id, _messagesProcessed);
+                            fetch.ControllerId, _messagesProcessed);
 
                         _resetEvent.Set();
                     }

@@ -2,7 +2,7 @@
 {
     public class Fetch
     {
-        public int Id { get; set; }
+        public int ControllerId { get; set; }
         public int OperationId { get; set; }
     }
 }
